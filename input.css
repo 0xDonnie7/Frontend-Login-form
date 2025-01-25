@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, html {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+
+html {
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+
+
+@layer base {
+    body {
+        background-color: hsl(148, 38%, 91%);
+        font-size: 1rem;
+        font-family: 'karla', sans-serif;
+    }
+
+    .success-wrapper {
+        background-color: hsl(187, 24%, 22%);
+    }
+
+    .head-container {
+        display: none;
+    }
+
+    input:hover, textarea:hover {
+        border: 2px solid hsl(169, 82%, 27%);
+        transition: 0.5s;
+    }
+
+    button {
+        background-color: hsl(169, 82%, 27%);
+    }
+
+    .input-wrapper .error {
+        display: none;
+    }
+
+    .invalid .error {
+        display: block;
+        color: #d93025;
+    }
+
+    .invalid input, .invalid textarea {
+        @apply border-rose-600;
+    }
+
+    label, h2 {
+        @apply text-gray-500;
+    }
+
+    input.fullwidth, textarea {
+        @apply w-full border-solid border-2 rounded-md p-2 my-2;
+    }
+
+    .input-wrapper {
+        @apply my-1;
+    }
+
+    .query-wrapper {
+        @apply border-2 border-solid border-gray-300 my-2 p-2;
+    }
+}

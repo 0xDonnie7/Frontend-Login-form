@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="output.css">
+  
+  <title>Frontend Mentor | Contact form</title>
+</head>
+<body class="w-11/12 m-auto h-auto mt-10 md:w-1/3">
+  <div class="h-auto max-w-md mx-auto p-4 rounded-md text-white success-wrapper head-container">
+    <div class="flex gap-2 p-2 w-1/2">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+      width="20" 
+      height="21" 
+      fill="none" 
+      viewBox="0 0 20 21">
+      <path fill="#fff" d="M14.28 7.72a.748.748 0 0 1 0 1.06l-5.25 5.25a.748.748 0 0 1-1.06 0l-2.25-2.25a.75.75 0 1 1 1.06-1.06l1.72 1.72 4.72-4.72a.75.75 0 0 1 1.06 0Zm5.47 2.78A9.75 9.75 0 1 1 10 .75a9.76 9.76 0 0 1 9.75 9.75Zm-1.5 0A8.25 8.25 0 1 0 10 18.75a8.26 8.26 0 0 0 8.25-8.25Z"/></svg>
+      <h1>Message Sent!</h1>
+    </div>
+    <h1>Thanks for completing the form, we'll be in contact soon</h1>
+  </div>
+  <div class="p-5 bg-white rounded-md font-bold">
+    <h1 class="mb-3 text-2xl">Contact Us</h1>
+      <form class="myForm md:grid md:grid-cols-2 gap-2">
+        <div class="input-wrapper errorFirstname">
+          <label for="firstName">First Name <span>*</span></label>
+          <input type="text" id="name" name="name" class="fullwidth firstName">
+          <h1 class="error">This field is required</h1>
+        </div>
+        <div class="input-wrapper errorLastname">
+          <label for="lastName">Last Name <span>*</span></label>
+          <input type="text" class="fullwidth lastName" id="name" name="name">
+          <h1 class="error">This field is required</h1>
+        </div>
+        <div class="input-wrapper errorEmail md:col-span-2">
+          <label for="Email">Email Address <span>*</span></label>
+          <input type="email" class="fullwidth requiredEmail" id="email" name="email">
+          <h1 class="error">Please enter a valid email address</h1>
+        </div>
+        <div class="input-wrapper checkRadioError md:col-span-2">
+          <label for="querytype">Query Type <span>*</span></label>
+          <div class="md:grid md:grid-cols-2 gap-2">
+            <div class="query-wrapper rounded-md">
+              <input type="radio" id="radio" name="radio" placeholder="Enter your name">
+              <label>General Enquiry</label>
+            </div>
+            <div class="query-wrapper rounded-md">
+              <input type="radio" id="radio" name="radio" placeholder="Enter your name">
+              <label>Support Request</label>
+            </div>
+          </div>
+          <h1 class="error">Please select a query type</h1>
+        </div>
+        <div class="input-wrapper errorMessage md:col-span-2">
+          <label for="message">Message <span>*</span></label>
+          <textarea class="h-24 requiredText" name="message"></textarea>
+          <h1 class="error">This field is required</h1>
+        </div>
+        <div class="input-wrapper flex md:col-span-2">
+          <input type="checkbox" class="myCheckbox mr-5">
+          <h2>I consent to being contacted by the team <span>*</span></h1>
+        </div>
+        <div class="input-wrapper errorCheckbox col-span-2">
+          <h1 class="error">To submit this form, please consent to being contacted</h1>
+        </div>
+        <button type="submit" class="w-full md:col-span-2 py-2 px-5 text-center rounded-md text-white">Submit</button>
+      </form>
+  </div>
+  
+ <script src="index.js"></script>
+</body>
+</html>
