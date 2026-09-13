@@ -1,0 +1,65 @@
+name: Deploy static site
+run-name: ${{ github.actor }} deployed "${{ github.event.head_commit.message }}"
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+ 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+ 
+      - name: Install dependencies
+        run: npm ci
+ 
+      - name: Build site
+        run: npm run build   # adjust if your build script has a different name
+ 
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::773913841415:role/githubActionsPolicyDeploy   # replace with your role ARN
+          aws-region: us-east-1   # adjust to your bucket's region
+ 
+      - name: Sync site files to S3
+        run: |
+          # No separate build folder here — Tailwind just compiles output.css
+          # in place, so we sync the whole project root, excluding anything
+          # that isn't part of the actual deployed site.
+          aws s3 sync . s3://login-form-frontend \
+            --delete \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "node_modules/*" \
+            --exclude "input.css" \
+            --exclude "package.json" \
+            --exclude "package-lock.json" \
+            --exclude "tailwind.config.js" \
+            --exclude "README.md" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --exclude "index.html"
+ 
+          # index.html should not be cached long, so browsers pick up new deploys quickly
+          aws s3 cp ./index.html s3://login-form-frontend/index.html \
+            --cache-control "public, max-age=0, must-revalidate"
+ 
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id E1AV58F6F1JCXE \
+            --paths "/*"
+ 
